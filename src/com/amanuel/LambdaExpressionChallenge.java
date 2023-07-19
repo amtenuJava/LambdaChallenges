@@ -34,10 +34,22 @@ public class LambdaExpressionChallenge {
         System.out.println("+++ Initials Added +++++++");
         System.out.println(Arrays.toString(names));
 
+
+
+        System.out.println("++++++++++++++++++++++++++");
+        namesList.replaceAll(s->s+=" "+getNamesReversed(s.split(" ")[0]));//leave the initial
+        Arrays.asList(names).forEach(s-> System.out.println(getNamesReversed(s)));
+
     }
 
 
     public static char getRandomAlphabet(char start,char end){
         return (char) random.nextInt((int)start,(int)end+1 );
     }
+
+    private static String getNamesReversed(String name){
+        return new StringBuilder(name).reverse().toString();
+    }
+
+
 }

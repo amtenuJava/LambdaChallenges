@@ -19,35 +19,41 @@ import java.util.Random;
 
 public class LambdaExpressionChallenge {
 
-    private static Random random=new Random();//jdk 17
+    private static Random random = new Random();//jdk 17
 
     public static void main(String[] args) {
 
-        String[] names={"Aman","Bob","Daniel","Solo"};
-        Arrays.setAll(names,i->names[i].toUpperCase());
+        String[] names = {"Aman", "Bob", "Daniel", "Solo"};
+        Arrays.setAll(names, i -> names[i].toUpperCase());
 
-        System.out.println("Transformed to upper case "+ Arrays.toString(names ));
+        System.out.println("Transformed to upper case " + Arrays.toString(names));
 
-        List<String> namesList=Arrays.asList(names);
+        List<String> namesList = Arrays.asList(names);
 
-        namesList.replaceAll(s -> s += " " +getRandomAlphabet('A','E')+ ".");
+        namesList.replaceAll(s -> s += " " + getRandomAlphabet('A', 'E') + ".");
         System.out.println("+++ Initials Added +++++++");
         System.out.println(Arrays.toString(names));
 
 
-
         System.out.println("++++++++++++++++++++++++++");
-        namesList.replaceAll(s->s+=" "+getNamesReversed(s.split(" ")[0]));//leave the initial
-        Arrays.asList(names).forEach(s-> System.out.println(getNamesReversed(s)));
+        namesList.replaceAll(s -> s += " " + getNamesReversed(s.split(" ")[0]));//leave the initial
+        Arrays.asList(names).forEach(s -> System.out.println(getNamesReversed(s)));
+
+        List<String> newList = new ArrayList<>(List.of(names));//new copy
+          newList.removeIf(s -> s.substring(0, s.indexOf(" "))
+                 .equals(s.substring(s.lastIndexOf(" ") + 1)));
+
+        System.out.println("++++++lastname == firstname removed+++++++");
+         newList.forEach(s-> System.out.println(s));
 
     }
 
 
-    public static char getRandomAlphabet(char start,char end){
-        return (char) random.nextInt((int)start,(int)end+1 );
+    public static char getRandomAlphabet(char start, char end) {
+        return (char) random.nextInt((int) start, (int) end + 1);
     }
 
-    private static String getNamesReversed(String name){
+    private static String getNamesReversed(String name) {
         return new StringBuilder(name).reverse().toString();
     }
 
